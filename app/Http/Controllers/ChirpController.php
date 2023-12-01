@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-//use Illuminate\Http\Response;
 use App\Models\Chirp;
 use Illuminate\Http\Request;
 
@@ -18,8 +17,9 @@ class ChirpController extends Controller
     public function index(): View
     {
         //
-        //return response('Hello, World!');
-        return view('chirps.index');
+        return view('chirps.index', [
+            'chirps' => Chirp::with('user')->latest()->get(),
+        ]);
     }
 
     /**
@@ -33,7 +33,7 @@ class ChirpController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    //public function store(Request $request)
+
     public function store(Request $request): RedirectResponse
     {
         //
